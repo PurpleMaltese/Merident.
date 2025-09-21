@@ -20,7 +20,7 @@ public class PacienteModel {
     } 
    
     //sin ID
-    public PacienteModel(int dni, String nombre, String apellido, int edad, String menorEdad, String apoderado, int celular, String direccion, String AntMed, String AntOdo, int activo) {
+    public PacienteModel(int dni, String nombre, String apellido, int edad, String menorEdad, String apoderado, int celular, String direccion, String AntMed, String AntOdo) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -31,7 +31,6 @@ public class PacienteModel {
         this.direccion = direccion;
         this.AntMed = AntMed;
         this.AntOdo = AntOdo;
-        this.activo = activo;
     }
     
     //con ID

@@ -1,7 +1,7 @@
 package DAO;
 
 import MODEL.CasoModel;
-import UTIL.Conexion;
+import UTIL.MySQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CasoDAO {
     
-    Conexion conexion = new Conexion();
+    MySQL conexion = new MySQL();
     
     //CRUD
     

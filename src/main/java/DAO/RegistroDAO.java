@@ -1,7 +1,7 @@
 package DAO;
 
 import MODEL.RegistroModel;
-import UTIL.Conexion;
+import UTIL.MySQL;
 import UTIL.StaticVariables;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegistroDAO {
-    Conexion conexion = new Conexion();  
+    MySQL conexion = new MySQL();  
     //CRUD
     
     //CREATE

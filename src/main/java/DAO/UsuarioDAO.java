@@ -1,14 +1,14 @@
 package DAO;
 
 import MODEL.UsuarioModel;
-import UTIL.Conexion;
+import UTIL.MySQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UsuarioDAO {
-    Conexion conexion = new Conexion();
+    MySQL conexion = new MySQL();
     
     public UsuarioModel validarUsuario(UsuarioModel usuario){
         String query ="SELECT * FROM usuarios WHERE username = ? AND password = ?";

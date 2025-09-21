@@ -1,12 +1,12 @@
 package DAO;
 
-import UTIL.Conexion;
+import UTIL.MySQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class HistoriaDAO {
-    Conexion conexion = new Conexion();
+    MySQL conexion = new MySQL();
     //CRUD
     
     //CREATE

@@ -1,12 +1,21 @@
 package CONTROLADOR;
 
 import DAO.CasoDAO;
+import IGU.CrearCasoPanel;
 import MODEL.CasoModel;
 import java.sql.SQLException;
 import java.util.List;
 
 public class CasoControlador {
-    private final CasoDAO casoDAO = new CasoDAO();
+    private final CasoDAO casoDAO;
+    
+    private final CrearCasoPanel crearCaso;
+
+    public CasoControlador(CasoDAO casoDAO, CrearCasoPanel crearCaso) {
+        this.casoDAO = casoDAO;
+        this.crearCaso = crearCaso;
+    }
+    
 
     public void crearCaso(CasoModel caso) {
         try {

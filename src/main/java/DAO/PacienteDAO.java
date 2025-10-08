@@ -59,6 +59,8 @@ public class PacienteDAO {
         throw e; // volver a lanzar la excepción si quieres manejarla más arriba
     }
 }
+    
+    
     //READ
      public List<PacienteModel> listarPacientes() {
         List<PacienteModel> pacientes = new ArrayList<>();

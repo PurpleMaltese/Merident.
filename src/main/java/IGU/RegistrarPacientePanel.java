@@ -1,6 +1,7 @@
 package IGU;
 
 import CONTROLADOR.PacienteControlador;
+import DAO.PacienteDAO;
 import MODEL.PacienteModel;
 
 public class RegistrarPacientePanel extends javax.swing.JPanel {
@@ -148,9 +149,7 @@ public class RegistrarPacientePanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,8 +158,10 @@ public class RegistrarPacientePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPacienteActionPerformed
-
-        PacienteControlador pacienteControlador = new PacienteControlador();
+        
+        PacienteDAO pacienteDAO = new PacienteDAO();
+        
+        PacienteControlador pacienteControlador = new PacienteControlador(pacienteDAO, this);
         
         PacienteModel paciente = new PacienteModel(Integer.parseInt(txtDNI.getText()),
                 txtNombre.getText(),

@@ -15,7 +15,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     }
     
     // 📌 Método para cambiar paneles dentro de contentPanel
-    private void mostrarPanel(javax.swing.JPanel panel) {
+    public void mostrarPanel(javax.swing.JPanel panel) {
         panel.setSize(contentPanel.getSize());
         panel.setLocation(0, 0);
 
@@ -142,7 +142,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPacienteActionPerformed
-        mostrarPanel(new BuscarPacientePanel());
+        mostrarPanel(new BuscarPacientePanel(this));
     }//GEN-LAST:event_btnBuscarPacienteActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

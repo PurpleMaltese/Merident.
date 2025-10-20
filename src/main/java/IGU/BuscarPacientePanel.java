@@ -1,22 +1,34 @@
 package IGU;
 
+import CONTROLADOR.HistoriaControlador;
+import CONTROLADOR.OtrosControlador;
 import CONTROLADOR.PacienteControlador;
+import DAO.OtrosDAO;
 import DAO.PacienteDAO;
 import MODEL.PacienteModel;
+import UTIL.StaticVariables;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
 public class BuscarPacientePanel extends javax.swing.JPanel {
 
+    private final PaginaPrincipal paginaPrincipal;//se crea el objeto para poder usar el metodo de cambiar de panel
 
-    public BuscarPacientePanel() {
+    public BuscarPacientePanel(PaginaPrincipal paginaPrincipa1) {
+        this.paginaPrincipal = paginaPrincipa1;
         initComponents();
     }
     
+    
+    
     PacienteDAO pacienteDAO = new PacienteDAO();
+    OtrosDAO otrosDAO = new OtrosDAO();
     
     PacienteControlador pacienteControlador = new PacienteControlador(pacienteDAO, this);
+    OtrosControlador otrosControlador = new OtrosControlador(otrosDAO, this);
+    
     
     //MUESTRA LA INFO DE LOS PACIENTES EN LA TABLA
      public void actualizarTablaPacientes(List<PacienteModel> pacientes) {
@@ -54,16 +66,17 @@ public class BuscarPacientePanel extends javax.swing.JPanel {
         txtCodigo = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        btnVerHC = new javax.swing.JButton();
 
         tblPaciente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "DNI", "Nombre", "Apellido", "Edad"
             }
         ));
         jScrollPane1.setViewportView(tblPaciente);
@@ -84,6 +97,13 @@ public class BuscarPacientePanel extends javax.swing.JPanel {
 
         jButton3.setText("jButton3");
 
+        btnVerHC.setText("Ver historia clinica");
+        btnVerHC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerHCActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,17 +113,19 @@ public class BuscarPacientePanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(179, 179, 179)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnListarTodo)
                                 .addGap(82, 82, 82)
-                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
-                                .addComponent(btnBuscar))))
+                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnVerHC)
+                            .addComponent(btnBuscar)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(278, 278, 278)
                         .addComponent(jButton3)))
-                .addGap(59, 59, 59))
+                .addGap(56, 56, 56))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,8 +135,13 @@ public class BuscarPacientePanel extends javax.swing.JPanel {
                     .addComponent(btnListarTodo)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
-                .addGap(44, 44, 44)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(143, 143, 143)
+                        .addComponent(btnVerHC)))
                 .addGap(52, 52, 52)
                 .addComponent(jButton3)
                 .addGap(55, 55, 55))
@@ -136,10 +163,40 @@ public class BuscarPacientePanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnVerHCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerHCActionPerformed
+         // Obtener la fila seleccionada
+        int selectedRow = tblPaciente.getSelectedRow();
+
+        if (selectedRow != -1) {
+            String DNI = tblPaciente.getValueAt(selectedRow, 1).toString();
+            StaticVariables.DNI=Integer.parseInt(DNI);
+            
+            String idPac = tblPaciente.getValueAt(selectedRow, 0).toString();
+            otrosControlador.obtenerCodHis(idPac);
+            otrosControlador.obtenerNombreCompleto(DNI);
+            System.out.println("Paciente "+ StaticVariables.Paciente);
+
+            if(StaticVariables.Paciente!=null && !StaticVariables.Paciente.isEmpty()){
+                JOptionPane.showMessageDialog(null, "Paciente: "+StaticVariables.Paciente);
+                HistoriaClinicaPanel newframe = new HistoriaClinicaPanel(paginaPrincipal);
+                System.out.println(paginaPrincipal);
+                paginaPrincipal.mostrarPanel(newframe);
+                
+                
+            }else{
+                System.out.println("no se encontro al paciente");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, selecciona un paciente.");
+        }
+    }//GEN-LAST:event_btnVerHCActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnListarTodo;
+    private javax.swing.JButton btnVerHC;
     private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblPaciente;

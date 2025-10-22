@@ -9,13 +9,15 @@ import java.math.BigDecimal;
 
 public class CrearCasoPanel extends javax.swing.JPanel {
 
+    private final PaginaPrincipal paginaPrincipal;
 
-    public CrearCasoPanel() {
+    public CrearCasoPanel(PaginaPrincipal paginaPrincipal) {
+        this.paginaPrincipal = paginaPrincipal;
         initComponents();
     }
 
     CasoDAO casoDAO = new CasoDAO();
-    
+   
     CasoControlador casoControlador = new CasoControlador(casoDAO, this);
     
     @SuppressWarnings("unchecked")
@@ -65,25 +67,29 @@ public class CrearCasoPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(210, 210, 210)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addGap(113, 113, 113)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCrearCaso)
-                    .addComponent(txtDiag, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-                    .addComponent(txtPlanTrat)
-                    .addComponent(txtExamAux)
-                    .addComponent(txtProf)
-                    .addComponent(txtDoctor)
-                    .addComponent(txtOdon)
-                    .addComponent(txtTotTra))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(113, 113, 113)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDiag, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                            .addComponent(txtPlanTrat)
+                            .addComponent(txtExamAux)
+                            .addComponent(txtProf)
+                            .addComponent(txtDoctor)
+                            .addComponent(txtOdon)
+                            .addComponent(txtTotTra)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(337, 337, 337)
+                        .addComponent(btnCrearCaso)))
                 .addContainerGap(384, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -117,9 +123,9 @@ public class CrearCasoPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtTotTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 250, Short.MAX_VALUE)
+                .addGap(76, 76, 76)
                 .addComponent(btnCrearCaso)
-                .addGap(36, 36, 36))
+                .addContainerGap(210, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

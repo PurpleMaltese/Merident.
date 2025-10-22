@@ -2,6 +2,8 @@ package DAO;
 
 import MODEL.CasoModel;
 import UTIL.MySQL;
+import UTIL.StaticVariables;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,22 +50,30 @@ public class CasoDAO {
     //READ
     public List<CasoModel> listarCasos() {
         List<CasoModel> casos = new ArrayList<>();
-        String query = "SELECT id_caso, diagnostico, plan_trat, doctor, fecha_inicio, fecha_fin FROM caso WHERE activo = 1;";
+        String query = "SELECT id_caso, diagnostico , plan_trat, exam_aux, proforma, doctor, odontograma, total_tratamiento, fecha_inicio,"
+                + " fecha_fin FROM caso WHERE activo = 1 AND id_historia = ?";
 
         try (Connection conn = conexion.establecerConexion();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(query);){
 
+            stmt.setInt(1, StaticVariables.Hiscod);
+            ResultSet rs = stmt.executeQuery();
+            
             while (rs.next()) {
                 CasoModel caso = new CasoModel();
                 caso.setId(rs.getInt("id_caso"));
                 caso.setDiagnostico(rs.getString("diagnostico"));
                 caso.setPlan_trat(rs.getString("plan_trat"));
+                caso.setExam_aux(rs.getString("exam_aux"));       // ruta o enlace
+                caso.setProforma(rs.getString("proforma"));       // ruta o enlace
                 caso.setDoctor(rs.getString("doctor"));
+                caso.setOdontograma(rs.getString("odontograma")); // ruta o enlace
+                caso.setTotal(rs.getBigDecimal("total_tratamiento"));
                 caso.setFecha_inicio(rs.getDate("fecha_inicio"));
                 caso.setFecha_fin(rs.getDate("fecha_fin"));
                 
                 casos.add(caso);
+                System.out.println("aaa");
             }
 
         } catch (SQLException e) {
